@@ -1,0 +1,31 @@
+<table class="table table-light mt-3">
+    <thead>
+        <tr>
+            <th colspan="6">ARTICULOS EN STOCK</th>
+            <th><button style="width: 100%" class="btn btn-success btn-block">New</button></th>
+        </tr>
+        <tr>
+            <th>#</th>
+            <th>CODIGO</th>
+            <th>MARCA</th>
+            <th>MODELO</th>
+            <th>MEDIDA</th>
+            <th>STOCK</th>
+            <th>-----</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let articulo of articulos">
+        <tr>
+            <td>{{ articulo.id}}</td>
+            <td>{{ articulo.cod_Articulo}}</td>
+            <td>{{ articulo.marca}}</td>
+            <td>{{ articulo.modelo}}</td>
+            <td>{{ articulo.medida}}</td>
+            <td>{{ articulo.cantidad}}</td>
+            <td>
+                <button style="width: 80px" class="btn btn-warning btn-sm" (click)="onEditArticulo()">Edit</button>
+                 / 
+                 <button style="width: 80px" class="btn btn-danger btn-sm">Delete</button></td>
+        </tr>
+    </tbody>
+</table>
