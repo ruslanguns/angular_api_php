@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class productosService {
   
-  headers = new HttpHeaders().set('Content-Type', 'application/json;charset=utf-8').append('Authorization', 'Bearer');
+  ///headers = new HttpHeaders().set('Content-Type', 'application/json;charset=utf-8').append('Authorization', 'Bearer');
 
   constructor(private http: HttpClient) { }
 
