@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { productosService } from '@app/service/service.service';
 import { Articulo } from '@app/interface/articulo.interface';
-
-
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.component.html',
@@ -21,8 +19,17 @@ export class ProductosComponent implements OnInit {
       this.articulos = res
     );
   }
-  onEditArticulo(id :number): void {
-    console.log('Editar Articulo', id);
+  onEditArticulo(data: Articulo): void {
+    const { cod_Articulo } = data;
+    alert('Editar Art : '+cod_Articulo);
+  }
+
+  onDeleteArticulo(data: Articulo): void {
+    //this.prodcSrv.delete(id).subscribe( res => 
+    //  console.log("Respuesta -> ", res)
+    //);
+    const { cod_Articulo } = data;
+    alert('Delete Art : '+cod_Articulo);
   }
 
 }

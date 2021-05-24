@@ -16,16 +16,16 @@
     </thead>
     <tbody *ngFor="let articulo of articulos">
         <tr>
-            <td>{{ articulo.id}}</td>
-            <td>{{ articulo.cod_Articulo}}</td>
-            <td>{{ articulo.marca}}</td>
-            <td>{{ articulo.modelo}}</td>
-            <td>{{ articulo.medida}}</td>
-            <td>{{ articulo.cantidad}}</td>
+            <td>{{ articulo.id }}</td>
+            <td>{{ articulo.cod_Articulo }}</td>
+            <td>{{ articulo.marca }}</td>
+            <td>{{ articulo.modelo }}</td>
+            <td>{{ articulo.medida }}</td>
+            <td>{{ articulo.cantidad }}</td>
             <td>
-                <button style="width: 80px" class="btn btn-warning btn-sm" (click)="onEditArticulo()">Edit</button>
+                <button style="width: 80px" class="btn btn-warning btn-sm" (click)="onEditArticulo(articulo)">Edit</button>
                  / 
-                 <button style="width: 80px" class="btn btn-danger btn-sm">Delete</button></td>
+                 <button style="width: 80px" class="btn btn-danger btn-sm" (click)="onDeleteArticulo(articulo)">Delete</button></td>
         </tr>
     </tbody>
 </table>
