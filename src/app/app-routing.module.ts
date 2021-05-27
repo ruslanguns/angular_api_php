@@ -1,6 +1,7 @@
 import { ContainerComponent } from './shared/container/container.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { config } from 'rxjs';
 
 const routes: Routes = [
   { 
@@ -28,7 +29,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes)
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

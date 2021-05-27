@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { productosService } from '@app/service/service.service';
 import { Articulo } from '@app/interface/articulo.interface';
+import { pipe } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.component.html',
@@ -9,9 +11,11 @@ import { Articulo } from '@app/interface/articulo.interface';
 export class ProductosComponent implements OnInit {
 
   articulos : Articulo;
+  data:any = {};
 
   constructor(
     private prodcSrv: productosService, 
+    private route: Router
   ) { }
 
   ngOnInit(): void{
@@ -25,11 +29,20 @@ export class ProductosComponent implements OnInit {
   }
 
   onDeleteArticulo(data: Articulo): void {
-    //this.prodcSrv.delete(id).subscribe( res => 
-    //  console.log("Respuesta -> ", res)
-    //);
-    const { cod_Articulo } = data;
-    alert('Delete Art : '+cod_Articulo);
+    const { id } = data;
+    this.prodcSrv.delete(id).subscribe( res =>
+      {
+        this.data = res;
+        if (this.data.status == "200"){
+          alert(`Respuesta : => ${this.data.message}`);
+        }else{
+          alert(`Respuesta : => ${this.data.message}`);
+        }
+        this.prodcSrv.getAll().subscribe( res => 
+          this.articulos = res
+        );
+        
+      }
+    );
   }
-
 }
