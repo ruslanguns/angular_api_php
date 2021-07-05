@@ -1,3 +1,7 @@
+<div>
+    <br>
+    <button class="btn btn-primary" (click)="listar()">Listar</button>
+</div>
 <table class="table table-light mt-3">
     <thead>
         <tr>
@@ -16,16 +20,21 @@
     </thead>
     <tbody *ngFor="let articulo of articulos">
         <tr>
-            <td>{{ articulo.id }}</td>
+            <td>
+                <p (click)="onViewArticulo(articulo)">{{ articulo.id }}</p>
+            </td>
             <td>{{ articulo.cod_Articulo }}</td>
             <td>{{ articulo.marca }}</td>
             <td>{{ articulo.modelo }}</td>
             <td>{{ articulo.medida }}</td>
             <td>{{ articulo.cantidad }}</td>
             <td>
-                <button style="width: 80px" class="btn btn-warning btn-sm" (click)="onEditArticulo(articulo)">Edit</button>
-                 / 
-                 <button style="width: 80px" class="btn btn-danger btn-sm" (click)="onDeleteArticulo(articulo)">Delete</button></td>
+                <button style="width: 80px" class="btn btn-warning btn-sm"
+                    (click)="onEditArticulo(articulo)">Edit</button>
+                /
+                <button style="width: 80px" class="btn btn-danger btn-sm"
+                    (click)="onDeleteArticulo(articulo)">Delete</button>
+            </td>
         </tr>
     </tbody>
 </table>

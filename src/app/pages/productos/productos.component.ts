@@ -20,12 +20,30 @@ export class ProductosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.prodcSrv.getAll().pipe(tap(articulos => this.articulos = articulos)).subscribe();
+    this.listar();
   }
+
+  listar(): void {
+    this.prodcSrv.getAll()
+      .pipe(
+        tap(articulos => this.articulos = articulos)
+      )
+      .subscribe();
+  }
+
   onEditArticulo(data: Articulo): void {
     const { cod_Articulo } = data;
     alert('Editar Art : ' + cod_Articulo);
   }
+
+  onViewArticulo(data: Articulo): void {
+    const { id } = data;
+    this.prodcSrv.getById(id)
+      .pipe(
+        tap(articulos => this.articulos = articulos)
+      ).subscribe();
+  }
+
   onNew(): void {
 
   }

@@ -18,8 +18,8 @@ export class productosService {
     return this.http.get<Articulo[]>(`${this.rutaApi}`);
   }
 
-  getById(id: number) {
-    return this.http.get<any>(`${this.rutaApi}/${id}`);
+  getById(id: number): Observable<Articulo[]> {
+    return this.http.get<Articulo[]>(`${this.rutaApi}/${id}`);
   }
 
   delete(id: number) {
