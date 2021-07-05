@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent implements OnInit {
+  open() {
+    throw new Error('Method not implemented.');
+  }
 
   constructor() { }
 

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { productosService } from '@app/service/service.service';
 import { Articulo } from '@app/interface/articulo.interface';
-import { pipe } from 'rxjs';
 import { Router } from '@angular/router';
+import { tap } from "rxjs/operators";
+
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.component.html',
@@ -10,39 +11,46 @@ import { Router } from '@angular/router';
 })
 export class ProductosComponent implements OnInit {
 
-  articulos : Articulo;
-  data:any = {};
+  articulos: Articulo[];
+  data: any = {};
 
   constructor(
-    private prodcSrv: productosService, 
+    private prodcSrv: productosService,
     private route: Router
   ) { }
 
-  ngOnInit(): void{
-    this.prodcSrv.getAll().subscribe( res => 
-      this.articulos = res
-    );
+  ngOnInit(): void {
+    this.prodcSrv.getAll().pipe(tap(articulos => this.articulos = articulos)).subscribe();
   }
   onEditArticulo(data: Articulo): void {
     const { cod_Articulo } = data;
-    alert('Editar Art : '+cod_Articulo);
+    alert('Editar Art : ' + cod_Articulo);
+  }
+  onNew(): void {
+
   }
 
   onDeleteArticulo(data: Articulo): void {
     const { id } = data;
-    this.prodcSrv.delete(id).subscribe( res =>
-      {
+    let mensaje = "Esta seguro ?";
+
+    if (confirm(mensaje)) {
+      this.prodcSrv.delete(id).subscribe(res => {
         this.data = res;
-        if (this.data.status == "200"){
+
+        if (this.data.status == 200) {
           alert(`Respuesta : => ${this.data.message}`);
-        }else{
+        } else {
           alert(`Respuesta : => ${this.data.message}`);
         }
-        this.prodcSrv.getAll().subscribe( res => 
+
+        this.prodcSrv.getAll().subscribe(res =>
           this.articulos = res
         );
-        
       }
-    );
+      );
+    }
   }
+
+
 }
