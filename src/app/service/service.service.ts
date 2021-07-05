@@ -12,14 +12,13 @@ export class productosService {
   ) { }
 
   rutaApi = "http://www.mastrosoft.com.ar/api/public/neumaticos";
-  //rutaApi = "http://localhost/www/api_gestion_slim3/public/neumaticos";
 
   getAll(): Observable<Articulo[]> {
     return this.http.get<Articulo[]>(`${this.rutaApi}`);
   }
 
-  getById(id: number): Observable<Articulo[]> {
-    return this.http.get<Articulo[]>(`${this.rutaApi}/${id}`);
+  getById(id: number): Observable<Articulo> {
+    return this.http.get<Articulo>(`${this.rutaApi}/${id}`);
   }
 
   delete(id: number) {

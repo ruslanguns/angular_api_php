@@ -1,7 +1,3 @@
-<div>
-    <br>
-    <button class="btn btn-primary" (click)="listar()">Listar</button>
-</div>
 <table class="table table-light mt-3">
     <thead>
         <tr>
@@ -21,7 +17,7 @@
     <tbody *ngFor="let articulo of articulos">
         <tr>
             <td>
-                <p (click)="onViewArticulo(articulo)">{{ articulo.id }}</p>
+                <p>{{ articulo.id }}</p>
             </td>
             <td>{{ articulo.cod_Articulo }}</td>
             <td>{{ articulo.marca }}</td>
@@ -38,3 +34,27 @@
         </tr>
     </tbody>
 </table>
+<ng-template #myModalInfo let-modal>
+
+    <div class="modal-content" *ngFor="let element of articulo">
+        <div class="modal-header">
+            <h5 class="modal-title">NEUMATICO</h5>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close"
+                (click)="modal.close()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="card mb-3" style="max-width: 100%;">
+                <div class="card-header"><b>{{element.marca}}</b> ( {{ element.cod_Articulo }} )</div>
+                <div class="card-body">
+                    <p class="card-text"><b>MODELO :</b>&nbsp; {{ element.modelo }}</p>
+                    <p class="card-text"><b>MEDIDA :</b>&nbsp; {{ element.medida }}</p>
+                    <p class="card-text"><b>STOCK :</b>&nbsp; {{ element.cantidad }}</p>
+                </div>
+            </div>
+            <button type="button" (click)="modal.close()" class="btn btn-danger">Close</button>
+        </div>
+    </div>
+
+</ng-template>
