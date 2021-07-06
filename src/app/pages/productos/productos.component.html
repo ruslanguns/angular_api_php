@@ -1,39 +1,38 @@
-<table class="table table-light mt-3">
-    <thead>
-        <tr>
-            <th colspan="6">ARTICULOS EN STOCK</th>
-            <th><button style="width: 100%" class="btn btn-success btn-block" (click)="onNew()">New</button></th>
-        </tr>
-        <tr>
-            <th>#</th>
-            <th>CODIGO</th>
-            <th>MARCA</th>
-            <th>MODELO</th>
-            <th>MEDIDA</th>
-            <th>STOCK</th>
-            <th>-----</th>
-        </tr>
-    </thead>
-    <tbody *ngFor="let articulo of articulos">
-        <tr>
-            <td>
-                <p>{{ articulo.id }}</p>
-            </td>
-            <td>{{ articulo.cod_Articulo }}</td>
-            <td>{{ articulo.marca }}</td>
-            <td>{{ articulo.modelo }}</td>
-            <td>{{ articulo.medida }}</td>
-            <td>{{ articulo.cantidad }}</td>
-            <td>
-                <button style="width: 80px" class="btn btn-warning btn-sm"
-                    (click)="onEditArticulo(articulo)">Edit</button>
-                /
-                <button style="width: 80px" class="btn btn-danger btn-sm"
-                    (click)="onDeleteArticulo(articulo)">Delete</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="container-fluid">
+    <table class="table table-light mt-3">
+        <thead>
+            <tr>
+                <th colspan="7">ARTICULOS EN STOCK</th>
+            </tr>
+            <tr>
+                <th>#</th>
+                <th>CODIGO</th>
+                <th>MARCA</th>
+                <th>MODELO</th>
+                <th>MEDIDA</th>
+                <th>STOCK</th>
+                <th><button style="width: 100%" class="btn btn-success btn-block" (click)="onNew()">New</button></th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let articulo of articulos">
+            <tr *ngIf="articulo.cantidad > 0">
+                <td>
+                    <p>{{ articulo.id }}</p>
+                </td>
+                <td>{{ articulo.cod_Articulo }}</td>
+                <td>{{ articulo.marca }}</td>
+                <td>{{ articulo.modelo }}</td>
+                <td>{{ articulo.medida }}</td>
+                <td class="centrar">{{ articulo.cantidad }}</td>
+                <td class="centrar">
+                    <button class="btn btn-warning btn-sm" (click)="onEditArticulo(articulo)">Edit</button>
+                    /
+                    <button class="btn btn-danger btn-sm" (click)="onDeleteArticulo(articulo)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 <ng-template #myModalInfo let-modal>
 
     <div class="modal-content" *ngFor="let element of articulo">
@@ -47,13 +46,22 @@
         <div class="modal-body">
             <div class="card mb-3" style="max-width: 100%;">
                 <div class="card-header"><b>{{element.marca}}</b> ( {{ element.cod_Articulo }} )</div>
-                <div class="card-body">
-                    <p class="card-text"><b>MODELO :</b>&nbsp; {{ element.modelo }}</p>
-                    <p class="card-text"><b>MEDIDA :</b>&nbsp; {{ element.medida }}</p>
-                    <p class="card-text"><b>STOCK :</b>&nbsp; {{ element.cantidad }}</p>
+                <div class="div-input form-group">
+                    <label class="col-form-label mt-4" for="inputModelo"><b>Modelo</b></label>
+                    <input type="text" class="form-control" value="{{ element.modelo }}" id="inputModelo">
+
+                    <label class="col-form-label mt-4" for="inputMedida"><b>Medida</b></label>
+                    <input type="text" class="form-control" value="{{ element.medida }}" id="inputMedida">
+
+                    <label class="col-form-label mt-4" for="inputCantidad"><b>Cantidad</b></label>
+                    <input type="number" class="form-control" value="{{ element.cantidad }}" id="inputCantidad">
+                    <br>
                 </div>
             </div>
-            <button type="button" (click)="modal.close()" class="btn btn-danger">Close</button>
+            <div class="row">
+                <button type="button" (click)="modal.close()" class="btn btn-info btn-block">Guardar</button>&nbsp;
+                <button type="button" (click)="modal.close()" class="btn btn-danger btn-block">Cerrar</button>
+            </div>
         </div>
     </div>
 
