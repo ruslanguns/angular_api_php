@@ -21,6 +21,9 @@
     "@angular/router": "~12.1.1",
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
     "bootstrap": "^5.0.1",
+    "fs": "0.0.1-security",
+    "fs-exists-sync": "^0.1.0",
+    "require": "^2.4.20",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
@@ -31,7 +34,7 @@
     "@angular/compiler-cli": "~12.1.1",
     "@types/bootstrap": "^5.0.15",
     "@types/jasmine": "~3.6.0",
-    "@types/node": "^12.11.1",
+    "@types/node": "^12.20.16",
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",

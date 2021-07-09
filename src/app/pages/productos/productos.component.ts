@@ -6,6 +6,7 @@ import { tap } from "rxjs/operators";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
+
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.component.html',
@@ -17,6 +18,7 @@ export class ProductosComponent implements OnInit {
 
   articulos: Articulo[];
   articulo: Articulo;
+  imagen = "";
 
   data: any = {};
 
@@ -43,8 +45,29 @@ export class ProductosComponent implements OnInit {
     const { id } = data;
     this.prodcSrv.getById(id)
       .pipe(
-        tap(articulos => this.articulo = articulos)
+        tap(res => {
+
+          this.articulo = res;
+          const { cod_Articulo } = this.articulo[0];
+
+          this.imagen = `../../assets/images/${cod_Articulo}.jpg`;
+
+          let urlVerify = UrlExists(this.imagen);
+
+          function UrlExists(url) {
+            var http = new XMLHttpRequest();
+            http.open('HEAD', url, false);
+            http.send();
+            return http.status != 404;
+          }
+
+          if (!urlVerify) {
+            this.imagen = "../../assets/images/sin-foto.jpg";
+          }
+
+        })
       ).subscribe();
+
   }
 
   onNew(): void {
