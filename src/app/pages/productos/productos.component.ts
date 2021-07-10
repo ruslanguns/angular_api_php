@@ -99,7 +99,8 @@ export class ProductosComponent implements OnInit {
 
   get urlImage() {
     if (this.articulo) {
-      return `/assets/images/${this.articulo.cod_Articulo}.jpg`;
+      return `${environment.apiUrl}/${this.articulo.cod_Articulo}.jpg`;
+      //return `/assets/images/${this.articulo.cod_Articulo}.jpg`;
     }
   }
 
