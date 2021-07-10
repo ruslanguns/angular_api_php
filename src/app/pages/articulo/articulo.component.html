@@ -1,36 +1,38 @@
 <div class="card-content formulario-div">
-    <div class="card-header mt-5">
-        <h5 class="card-title">NEUMATICO (Nuevo)</h5>
+  <div class="card-header mt-5">
+    <h5 class="card-title">NEUMATICO (Nuevo)</h5>
+  </div>
+  <form [formGroup]="formulario" class="form-group">
+    <div class="mb-3">
+      <div class="div-input form-group">
+
+        <label class="col-form-label mt-4" for="inputMarca"><b>Marca</b></label>
+        <input type="text" class="form-control" id="inputMarca" formControlName="marca">
+
+        <label class="col-form-label mt-4" for="inputModelo"><b>Modelo</b></label>
+        <input type="text" class="form-control" id="inputModelo" formControlName="modelo">
+
+        <label class="col-form-label mt-4" for="inputMedida"><b>Medida</b></label>
+        <input type="text" class="form-control" id="inputMedida" formControlName="medida">
+
+        <label class="col-form-label mt-4" for="inputProveedor"><b>Cod. Proveedor</b>&nbsp;<span class="comentario">(
+            Opcional
+            )</span></label>
+        <input type="text" class="form-control" id="inputProveedor" formControlName="codProveedor">
+
+        <label class="col-form-label mt-4" for="inputCantidad"><b>Cantidad</b></label>
+        <input type="number" class="form-control" id="inputCantidad" formControlName="cantidad">
+
+        <label class="col-form-label mt-4" for="inputImagen"><b>Imágen</b></label>
+        <input type="file" class="form-control" name="imgMuestra" id="inputImagen">
+        <br>
+      </div>
+      <div class="row">
+        <button type="button" (click)="onSave()" class="btn btn-info btn-block">Guardar</button>&nbsp;
+      </div>
+      <div class="row">
+        <button type="button" routerLink="/productos" class="btn btn-danger btn-block">Cerrar</button>
+      </div>
     </div>
-    <form [formGroup]="formulario" class="form-group">
-        <div class="mb-3">
-            <div class="div-input form-group">
-
-                <label class="col-form-label mt-4" for="inputMarca"><b>Marca</b></label>
-                <input type="text" class="form-control" id="inputMarca" formControlName="marca">
-
-                <label class="col-form-label mt-4" for="inputModelo"><b>Modelo</b></label>
-                <input type="text" class="form-control" id="inputModelo" formControlName="modelo">
-
-                <label class="col-form-label mt-4" for="inputMedida"><b>Medida</b></label>
-                <input type="text" class="form-control" id="inputMedida" formControlName="medida">
-
-                <label class="col-form-label mt-4" for="inputProveedor"><b>Proveedor</b></label>
-                <input type="text" class="form-control" id="inputProveedor" formControlName="codProveedor">
-
-                <label class="col-form-label mt-4" for="inputCantidad"><b>Cantidad</b></label>
-                <input type="number" class="form-control" id="inputCantidad" formControlName="cantidad">
-
-                <label class="col-form-label mt-4" for="inputImagen"><b>Imágen</b></label>
-                <input type="file" class="form-control" name="imgMuestra" id="inputImagen">
-                <br>
-            </div>
-            <div class="row">
-                <button type="button" (click)="onSave()" class="btn btn-info btn-block">Guardar</button>&nbsp;
-            </div>
-            <div class="row">
-                <button type="button" routerLink="/productos" class="btn btn-danger btn-block">Cerrar</button>
-            </div>
-        </div>
-    </form>
+  </form>
 </div>
