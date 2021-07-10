@@ -83,7 +83,7 @@ export class ProductosComponent implements OnInit {
   }
 
   onNew(): void {
-    alert("Nuevo Articulo !")
+    this.route.navigate(['/articulo']);
   }
 
   onDeleteArticulo(data: Articulo): void {
