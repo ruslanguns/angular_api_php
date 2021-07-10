@@ -1,12 +1,10 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { ProductosService } from '@app/service/productos.service';
-import { Articulo } from '@app/interface/articulo.interface';
-import { Router } from '@angular/router';
-import { tap } from "rxjs/operators";
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup } from '@angular/forms';
-import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Articulo } from '@app/interface/articulo.interface';
+import { ProductosService } from '@app/service/productos.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { tap } from "rxjs/operators";
 
 
 @Component({
@@ -27,7 +25,6 @@ export class ProductosComponent implements OnInit {
     private prodcSrv: ProductosService,
     private route: Router,
     private modalService: NgbModal,
-    private http: HttpClient
   ) { }
 
   formulario = new FormGroup({
@@ -99,8 +96,8 @@ export class ProductosComponent implements OnInit {
 
   get urlImage() {
     if (this.articulo) {
-      return `${environment.apiUrl}/${this.articulo.cod_Articulo}.jpg`;
-      //return `/assets/images/${this.articulo.cod_Articulo}.jpg`;
+      //return `${environment.apiUrl}/${this.articulo.cod_Articulo}.jpg`;
+      return `/assets/images/${this.articulo.cod_Articulo}.jpg`;
     }
   }
 

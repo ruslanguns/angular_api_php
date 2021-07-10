@@ -10,11 +10,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class ArticuloComponent implements OnInit {
 
   formulario = new FormGroup({
-    id: new FormControl(''),
-    cod_Articulo: new FormControl(''),
     marca: new FormControl(''),
     modelo: new FormControl(''),
     medida: new FormControl(''),
+    codProveedor: new FormControl(''),
     cantidad: new FormControl('')
   });
 

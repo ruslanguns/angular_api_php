@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ArticuloRoutingModule } from './articulo-routing.module';
 import { ArticuloComponent } from './articulo.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +12,9 @@ import { ArticuloComponent } from './articulo.component';
   ],
   imports: [
     CommonModule,
-    ArticuloRoutingModule
+    ArticuloRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class ArticuloModule { }
