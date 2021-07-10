@@ -1,10 +1,12 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { productosService } from '@app/service/service.service';
+import { ProductosService } from '@app/service/productos.service';
 import { Articulo } from '@app/interface/articulo.interface';
 import { Router } from '@angular/router';
 import { tap } from "rxjs/operators";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup } from '@angular/forms';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-productos',
@@ -19,18 +21,19 @@ export class ProductosComponent implements OnInit {
   articulo: Articulo;
   imagen = "";
 
-  data: any = {};
+  get urlImage() {
+    if (this.articulo) {
+      return `${environment.apiUrl}/imgProducto/${this.articulo.cod_Articulo}.jpg`
+    }
+  }
 
   constructor(
-    private prodcSrv: productosService,
+    private prodcSrv: ProductosService,
     private route: Router,
     private modalService: NgbModal
   ) { }
 
   formulario = new FormGroup({
-    id: new FormControl(''),
-    cod_Articulo: new FormControl(''),
-    marca: new FormControl(''),
     modelo: new FormControl(''),
     medida: new FormControl(''),
     cantidad: new FormControl('')
@@ -48,38 +51,29 @@ export class ProductosComponent implements OnInit {
       .subscribe();
   }
 
-  onEditArticulo(data: Articulo): void {
+  onEditArticulo(data: Articulo) {
     this.modalService.open(this.myModalInfo);
     const { id } = data;
     this.prodcSrv.getById(id)
       .pipe(
-        tap(res => {
+        tap(articulo => this.articulo = articulo),
 
-          this.articulo = res;
-          const { cod_Articulo } = this.articulo[0];
-
-          this.imagen = `../../assets/images/${cod_Articulo}.jpg`;
-
-          let urlVerify = UrlExists(this.imagen);
-
-          function UrlExists(url) {
-            var http = new XMLHttpRequest();
-            http.open('HEAD', url, false);
-            http.send();
-            return http.status != 404;
-          }
-
-          if (!urlVerify) {
-            this.imagen = "../../assets/images/sin-foto.jpg";
-          }
-
-        })
       ).subscribe();
 
   }
 
   onSave(formulario: Articulo) {
-    console.log("Formulario => ", formulario['value'])
+    const datos = this.formulario.value;
+    console.log('Desde modelo', this.articulo);
+    console.log('Desde formulario', datos);
+
+    if (this.formulario.valid) {
+      // Hacer un mapping de los cambios. (LEER SOBRE "AUTOMAPPERS")
+      const nuevosDatos = { ...this.articulo, ...datos }
+
+      console.log('Estos es el nuevo objeto', nuevosDatos);
+    }
+
   }
 
   onNew(): void {
@@ -91,22 +85,24 @@ export class ProductosComponent implements OnInit {
     let mensaje = "Esta seguro ?";
 
     if (confirm(mensaje)) {
-      this.prodcSrv.delete(id).subscribe(res => {
-        this.data = res;
+      this.prodcSrv.delete(id).subscribe(articuloEliminado => {
 
-        if (this.data.status == 200) {
-          alert(`Respuesta : => ${this.data.message}`);
+        if (articuloEliminado.status == 200) {
+          alert(`Respuesta : => ${articuloEliminado.message}`);
         } else {
-          alert(`Respuesta : => ${this.data.message}`);
+          alert(`Respuesta : => ${articuloEliminado.message}`);
         }
 
-        this.prodcSrv.getAll().subscribe(res =>
-          this.articulos = res
+        this.prodcSrv.getAll().subscribe(data =>
+          this.articulos = data
         );
       }
       );
     }
   }
 
+  onImageError(event: any) {
+    event.target.src = '/assets/images/sin-foto.jpg'
+  }
 
 }

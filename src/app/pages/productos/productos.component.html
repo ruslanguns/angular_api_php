@@ -14,20 +14,20 @@
                 <th><button style="width: 100%" class="btn btn-success btn-block" (click)="onNew()">New</button></th>
             </tr>
         </thead>
-        <tbody *ngFor="let articulo of articulos">
-            <tr *ngIf="articulo.cantidad > 0">
+        <tbody *ngFor="let art of articulos">
+            <tr *ngIf="art.cantidad > 0">
                 <td>
-                    <p>{{ articulo.id }}</p>
+                    <p>{{ art.id }}</p>
                 </td>
-                <td>{{ articulo.cod_Articulo }}</td>
-                <td>{{ articulo.marca }}</td>
-                <td>{{ articulo.modelo }}</td>
-                <td>{{ articulo.medida }}</td>
-                <td class="centrar">{{ articulo.cantidad }}</td>
+                <td>{{ art.cod_Articulo }}</td>
+                <td>{{ art.marca }}</td>
+                <td>{{ art.modelo }}</td>
+                <td>{{ art.medida }}</td>
+                <td class="centrar">{{ art.cantidad }}</td>
                 <td class="centrar">
-                    <button class="btn btn-warning btn-sm" (click)="onEditArticulo(articulo)">Edit</button>
+                    <button class="btn btn-warning btn-sm" (click)="onEditArticulo(art)">Edit</button>
                     /
-                    <button class="btn btn-danger btn-sm" (click)="onDeleteArticulo(articulo)">Delete</button>
+                    <button class="btn btn-danger btn-sm" (click)="onDeleteArticulo(art)">Delete</button>
                 </td>
             </tr>
         </tbody>
@@ -35,7 +35,7 @@
 </div>
 <ng-template #myModalInfo let-modal>
 
-    <div class="modal-content" *ngFor="let element of articulo">
+    <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title">NEUMATICO</h5>
             <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close"
@@ -44,35 +44,33 @@
             </button>
         </div>
         <div class="modal-body">
-            <form [formGroup]="formulario" class="form-group" (click)="onSave(formulario)">
-                <input type="hidden" value="{{element.id}}" [FormControlName]="id">
-                <input type="hidden" value="{{element.cod_Articulo}}" [FormControlName]="cod_Articulo">
-                <input type="hidden" value="{{element.marca}}" [FormControlName]="marca">
+            <form [formGroup]="formulario" class="form-group">
                 <div class="card mb-3" style="max-width: 100%;">
-                    <div class="card-header"><b>{{element.marca}}</b> ( {{ element.cod_Articulo }} )</div>
+                    <div class="card-header"><b>{{articulo?.marca}}</b> ( {{ articulo?.cod_Articulo }} )</div>
                     <div class="div-input form-group">
 
                         <label class="col-form-label mt-4" for="inputModelo"><b>Modelo</b></label>
-                        <input type="text" class="form-control" value="{{ element.modelo }}" id="inputModelo"
-                            [FormControlName]="modelo">
+                        <input type="text" class="form-control" value="{{ articulo?.modelo }}" id="inputModelo"
+                            [FormControlName]="formulario.modelo">
 
                         <label class="col-form-label mt-4" for="inputMedida"><b>Medida</b></label>
-                        <input type="text" class="form-control" value="{{ element.medida }}" id="inputMedida"
-                            [FormControlName]="medida">
+                        <input type="text" class="form-control" value="{{ articulo?.medida }}" id="inputMedida"
+                            [FormControlName]="formulario.medida">
 
                         <label class="col-form-label mt-4" for="inputCantidad"><b>Cantidad</b></label>
-                        <input type="number" class="form-control" value="{{ element.cantidad }}" id="inputCantidad"
-                            [FormControlName]="cantidad">
+                        <input type="number" class="form-control" value="{{ articulo?.cantidad }}" id="inputCantidad"
+                            [FormControlName]="formulario.cantidad">
 
                         <div class="imgMuestra">
-                            <img src="{{ imagen }}" alt="img">
+                            <img [src]="urlImage" (error)="onImageError($event)" alt="img">
                         </div>
                         <input type="file" class="form-control" name="imgMuestra">
                         <br>
                     </div>
                 </div>
                 <div class="row">
-                    <button type="button" (click)="modal.close()" class="btn btn-info btn-block">Guardar</button>&nbsp;
+                    <button type="button" (click)="onSave(formulario)"
+                        class="btn btn-info btn-block">Guardar</button>&nbsp;
                 </div>
                 <div class="row">
                     <button type="button" (click)="modal.close()" class="btn btn-danger btn-block">Cerrar</button>
