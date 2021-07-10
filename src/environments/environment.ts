@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://aj.mastrosoft.com.ar'
+  apiUrl: 'http://aj.mastrosoft.com.ar'
 
 };
 

@@ -25,8 +25,7 @@
                 <td>{{ art.medida }}</td>
                 <td class="centrar">{{ art.cantidad }}</td>
                 <td class="centrar">
-                    <button class="btn btn-warning btn-sm" (click)="onEditArticulo(art)">Edit</button>
-                    /
+                    <button class="btn btn-warning btn-sm" (click)="onEditArticulo(art)">Edit</button> /
                     <button class="btn btn-danger btn-sm" (click)="onDeleteArticulo(art)">Delete</button>
                 </td>
             </tr>
@@ -38,8 +37,7 @@
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title">NEUMATICO</h5>
-            <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close"
-                (click)="modal.close()">
+            <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close" (click)="modal.close()">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
@@ -50,27 +48,23 @@
                     <div class="div-input form-group">
 
                         <label class="col-form-label mt-4" for="inputModelo"><b>Modelo</b></label>
-                        <input type="text" class="form-control" value="{{ articulo?.modelo }}" id="inputModelo"
-                            [FormControlName]="formulario.modelo">
+                        <input type="text" class="form-control" value="{{ articulo?.modelo }}" id="inputModelo" [FormControlName]="formulario.modelo">
 
                         <label class="col-form-label mt-4" for="inputMedida"><b>Medida</b></label>
-                        <input type="text" class="form-control" value="{{ articulo?.medida }}" id="inputMedida"
-                            [FormControlName]="formulario.medida">
+                        <input type="text" class="form-control" value="{{ articulo?.medida }}" id="inputMedida" [FormControlName]="formulario.medida">
 
                         <label class="col-form-label mt-4" for="inputCantidad"><b>Cantidad</b></label>
-                        <input type="number" class="form-control" value="{{ articulo?.cantidad }}" id="inputCantidad"
-                            [FormControlName]="formulario.cantidad">
+                        <input type="number" class="form-control" value="{{ articulo?.cantidad }}" id="inputCantidad" [FormControlName]="formulario.cantidad">
 
                         <div class="imgMuestra">
-                            <img [src]="urlImage" (error)="onImageError($event)" alt="img">
+                            <img [src]="urlImage" (error)="onImageError($event)" alt="img" crossorigin="anonymous">
                         </div>
                         <input type="file" class="form-control" name="imgMuestra">
                         <br>
                     </div>
                 </div>
                 <div class="row">
-                    <button type="button" (click)="onSave(formulario)"
-                        class="btn btn-info btn-block">Guardar</button>&nbsp;
+                    <button type="button" (click)="onSave()" class="btn btn-info btn-block">Guardar</button>&nbsp;
                 </div>
                 <div class="row">
                     <button type="button" (click)="modal.close()" class="btn btn-danger btn-block">Cerrar</button>

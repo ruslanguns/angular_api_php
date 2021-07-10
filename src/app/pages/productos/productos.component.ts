@@ -6,6 +6,7 @@ import { tap } from "rxjs/operators";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup } from '@angular/forms';
 import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -21,16 +22,12 @@ export class ProductosComponent implements OnInit {
   articulo: Articulo;
   imagen = "";
 
-  get urlImage() {
-    if (this.articulo) {
-      return `${environment.apiUrl}/imgProducto/${this.articulo.cod_Articulo}.jpg`
-    }
-  }
 
   constructor(
     private prodcSrv: ProductosService,
     private route: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private http: HttpClient
   ) { }
 
   formulario = new FormGroup({
@@ -40,10 +37,10 @@ export class ProductosComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.listar();
+    this.list();
   }
 
-  listar(): void {
+  list(): void {
     this.prodcSrv.getAll()
       .pipe(
         tap(articulos => this.articulos = articulos)
@@ -57,12 +54,11 @@ export class ProductosComponent implements OnInit {
     this.prodcSrv.getById(id)
       .pipe(
         tap(articulo => this.articulo = articulo),
-
       ).subscribe();
 
   }
 
-  onSave(formulario: Articulo) {
+  onSave() {
     const datos = this.formulario.value;
     console.log('Desde modelo', this.articulo);
     console.log('Desde formulario', datos);
@@ -101,8 +97,14 @@ export class ProductosComponent implements OnInit {
     }
   }
 
+  get urlImage() {
+    if (this.articulo) {
+      return `/assets/images/${this.articulo.cod_Articulo}.jpg`;
+    }
+  }
+
   onImageError(event: any) {
-    event.target.src = '/assets/images/sin-foto.jpg'
+    event.target.src = '/assets/images/sin-foto.jpg';
   }
 
 }
