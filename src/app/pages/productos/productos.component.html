@@ -44,28 +44,40 @@
             </button>
         </div>
         <div class="modal-body">
-            <div class="card mb-3" style="max-width: 100%;">
-                <div class="card-header"><b>{{element.marca}}</b> ( {{ element.cod_Articulo }} )</div>
-                <div class="div-input form-group">
-                    <label class="col-form-label mt-4" for="inputModelo"><b>Modelo</b></label>
-                    <input type="text" class="form-control" value="{{ element.modelo }}" id="inputModelo">
+            <form [formGroup]="formulario" class="form-group" (click)="onSave(formulario)">
+                <input type="hidden" value="{{element.id}}" [FormControlName]="id">
+                <input type="hidden" value="{{element.cod_Articulo}}" [FormControlName]="cod_Articulo">
+                <input type="hidden" value="{{element.marca}}" [FormControlName]="marca">
+                <div class="card mb-3" style="max-width: 100%;">
+                    <div class="card-header"><b>{{element.marca}}</b> ( {{ element.cod_Articulo }} )</div>
+                    <div class="div-input form-group">
 
-                    <label class="col-form-label mt-4" for="inputMedida"><b>Medida</b></label>
-                    <input type="text" class="form-control" value="{{ element.medida }}" id="inputMedida">
+                        <label class="col-form-label mt-4" for="inputModelo"><b>Modelo</b></label>
+                        <input type="text" class="form-control" value="{{ element.modelo }}" id="inputModelo"
+                            [FormControlName]="modelo">
 
-                    <label class="col-form-label mt-4" for="inputCantidad"><b>Cantidad</b></label>
-                    <input type="number" class="form-control" value="{{ element.cantidad }}" id="inputCantidad">
-                    <div class="imgMuestra">
-                        <img src="{{ imagen }}" alt="img">
+                        <label class="col-form-label mt-4" for="inputMedida"><b>Medida</b></label>
+                        <input type="text" class="form-control" value="{{ element.medida }}" id="inputMedida"
+                            [FormControlName]="medida">
+
+                        <label class="col-form-label mt-4" for="inputCantidad"><b>Cantidad</b></label>
+                        <input type="number" class="form-control" value="{{ element.cantidad }}" id="inputCantidad"
+                            [FormControlName]="cantidad">
+
+                        <div class="imgMuestra">
+                            <img src="{{ imagen }}" alt="img">
+                        </div>
+                        <input type="file" class="form-control" name="imgMuestra">
+                        <br>
                     </div>
-                    <input type="file" class="form-control" name="imgMuestra">
-                    <br>
                 </div>
-            </div>
-            <div class="row">
-                <button type="button" (click)="modal.close()" class="btn btn-info btn-block">Guardar</button>&nbsp;
-                <button type="button" (click)="modal.close()" class="btn btn-danger btn-block">Cerrar</button>
-            </div>
+                <div class="row">
+                    <button type="button" (click)="modal.close()" class="btn btn-info btn-block">Guardar</button>&nbsp;
+                </div>
+                <div class="row">
+                    <button type="button" (click)="modal.close()" class="btn btn-danger btn-block">Cerrar</button>
+                </div>
+            </form>
         </div>
     </div>
 

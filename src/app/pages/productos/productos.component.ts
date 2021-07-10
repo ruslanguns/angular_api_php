@@ -4,8 +4,7 @@ import { Articulo } from '@app/interface/articulo.interface';
 import { Router } from '@angular/router';
 import { tap } from "rxjs/operators";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-productos',
@@ -27,6 +26,15 @@ export class ProductosComponent implements OnInit {
     private route: Router,
     private modalService: NgbModal
   ) { }
+
+  formulario = new FormGroup({
+    id: new FormControl(''),
+    cod_Articulo: new FormControl(''),
+    marca: new FormControl(''),
+    modelo: new FormControl(''),
+    medida: new FormControl(''),
+    cantidad: new FormControl('')
+  });
 
   ngOnInit(): void {
     this.listar();
@@ -68,6 +76,10 @@ export class ProductosComponent implements OnInit {
         })
       ).subscribe();
 
+  }
+
+  onSave(formulario: Articulo) {
+    console.log("Formulario => ", formulario['value'])
   }
 
   onNew(): void {
