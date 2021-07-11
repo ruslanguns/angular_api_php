@@ -35,12 +35,12 @@ export class ProductosComponent implements OnInit {
 
   ngOnInit(): void {
     this.list();
-    console.log("data : ", this.articulos)
+    console.log("this.articulos : ", this.articulos)
   }
 
   list() {
     this.prodcSrv.getAll()
-      .pipe(tap(articulos => this.articulos = articulos), tap(articulos => console.log('resp ', articulos)))
+      .pipe(tap(articulos => this.articulos = articulos), tap(articulos => console.log('respuesta Serv. ', articulos)))
       .subscribe();
   }
 
