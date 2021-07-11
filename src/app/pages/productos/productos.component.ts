@@ -37,18 +37,19 @@ export class ProductosComponent implements OnInit {
     this.list();
   }
 
-  list(): void {
+  list() {
     this.prodcSrv.getAll()
       .pipe(
         tap(articulos => this.articulos = articulos)
       )
       .subscribe();
+
   }
 
   onEditArticulo(data: Articulo) {
     this.modalService.open(this.myModalInfo);
-    const { id } = data;
-    this.prodcSrv.getById(id)
+    const { idneumaticos } = data;
+    this.prodcSrv.getById(idneumaticos)
       .pipe(
         tap(articulo => this.articulo = articulo),
       ).subscribe();
@@ -74,11 +75,11 @@ export class ProductosComponent implements OnInit {
   }
 
   onDeleteArticulo(data: Articulo): void {
-    const { id } = data;
+    const { idneumaticos } = data;
     let mensaje = "Esta seguro ?";
 
     if (confirm(mensaje)) {
-      this.prodcSrv.delete(id).subscribe(articuloEliminado => {
+      this.prodcSrv.delete(idneumaticos).subscribe(articuloEliminado => {
 
         if (articuloEliminado.status == 200) {
           alert(`Respuesta : => ${articuloEliminado.message}`);
@@ -86,9 +87,7 @@ export class ProductosComponent implements OnInit {
           alert(`Respuesta : => ${articuloEliminado.message}`);
         }
 
-        this.prodcSrv.getAll().subscribe(data =>
-          this.articulos = data
-        );
+        this.list();
       }
       );
     }

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://aj.mastrosoft.com.ar/imgProducto'
+  apiUrl: 'https://aj.mastrosoft.com.ar/imgProducto',
+  //apiRest: 'http://www.mastrosoft.com.ar/api/public/neumaticos'
 
 };
 
