@@ -35,24 +35,20 @@ export class ProductosComponent implements OnInit {
 
   ngOnInit(): void {
     this.list();
+    console.log("data : ", this.articulos)
   }
 
   list() {
     this.prodcSrv.getAll()
-      .pipe(
-        tap(articulos => this.articulos = articulos)
-      )
+      .pipe(tap(articulos => this.articulos = articulos), tap(articulos => console.log('resp ', articulos)))
       .subscribe();
-
   }
 
   onEditArticulo(data: Articulo) {
     this.modalService.open(this.myModalInfo);
     const { idneumaticos } = data;
     this.prodcSrv.getById(idneumaticos)
-      .pipe(
-        tap(articulo => this.articulo = articulo),
-      ).subscribe();
+      .pipe(tap(articulo => this.articulo = articulo)).subscribe();
 
   }
 

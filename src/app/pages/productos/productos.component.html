@@ -17,9 +17,7 @@
     </thead>
     <tbody *ngFor="let art of articulos">
       <tr *ngIf="art.cantidad > 0">
-        <td>
-          <p>{{ art.id }}</p>
-        </td>
+        <td>{{ art.idneumaticos }}</td>
         <td>{{ art.cod_Articulo }}</td>
         <td>{{ art.marca }}</td>
         <td>{{ art.modelo }}</td>
